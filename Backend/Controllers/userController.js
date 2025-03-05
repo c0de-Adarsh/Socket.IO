@@ -113,4 +113,86 @@ const loginUser = async(req, res) => {
     }
 }
 
-module.exports = {registerUser,loginUser}
+
+const logOutUser = async (req , res) =>{
+
+    try {
+       
+        if(req.user){
+
+            const user = await User.findById(req.user._id);
+
+            if(user){
+                user.status = 'offline'
+                await user.save()
+            }
+        }
+
+
+        //clear cookie
+
+        res.cookie('jwt','',{
+
+            httpOnly:true,
+            expires: new Date(0)
+        })
+
+        res.json({ message: 'Logged out successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+ const getUserProfile = async (req , res) => {
+
+    try {
+       
+        const user = await User.findById(req.user._id).select('-password')
+
+        if(user){
+            res.json(user)
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+ }
+
+
+ const updateUser = async (req , res) =>{
+
+    try {
+       
+        const user = await User.findById(req.user._id)
+
+        if(user){
+
+            user.username = req.body.username || user.username;
+            user.email = req.body.email || user.email;
+            user.avatar = req.body.avatar || user.avatar;
+            user.status = req.body.status || user.status;
+        
+
+        if(req.body.password){
+            user.password = req.body.password;
+        }
+
+        const updateuser = await user.save()
+
+        res.json({
+            _id:updateuser._id,
+            username:updateuser.username,
+            email: updateuser.email,
+            avatar: updateuser.avatar,
+            status: updateuser.status
+        })
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+ }
+module.exports = {registerUser,loginUser,getUserProfile,logOutUser,updateUser}
