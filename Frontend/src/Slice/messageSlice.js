@@ -80,15 +80,15 @@ const messageSlice = createSlice({
       extraReducers: (builder) => {
         builder
           // Get messages
-          .addCase(getMessages.pending, (state) => {
+          .addCase(getMessage.pending, (state) => {
             state.loading = true;
             state.error = null;
           })
-          .addCase(getMessages.fulfilled, (state, action) => {
+          .addCase(getMessage.fulfilled, (state, action) => {
             state.loading = false;
             state.messages = action.payload;
           })
-          .addCase(getMessages.rejected, (state, action) => {
+          .addCase(getMessage.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
           })
