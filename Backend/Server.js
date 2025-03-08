@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.json({ limit: "10mb" })); 
 app.use(cookieParser())
+app.use(cors({
+  origin:'http://localhost:5173',
+  credentials:true
+})) 
  app.use(router)
 
 
@@ -26,10 +30,7 @@ const io = new Server(server, {
 
 socketHandler(io);
 
- app.use(cors({
-    origin:'*',
-    credentials:true
- }))
+
 app.get('/h',( req , res)=>{
     res.send('Hello world')
 })
