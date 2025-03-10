@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../Utils";
+import axios from "axios";
 
 
 const initialState = {
@@ -10,21 +11,23 @@ const initialState = {
 
 
 
- export const getMessage = createAsyncThunk(
+  export const getMessage = createAsyncThunk(
     'message/getMessages',
-
-    async (roomId , {rejectWithValue}) => {
-
+    async (roomId, { rejectWithValue }) => {
         try {
+           
+
             const { data } = await axios.get(`${API}/${roomId}`, {
-              withCredentials: true
+                withCredentials: true
             });
+
             return data;
-          } catch (error) {
+        } catch (error) {
+          
             return rejectWithValue(error.response?.data?.message || 'Failed to fetch messages');
-          }
+        }
     }
- )
+);
 
 
  export const sendMessage = createAsyncThunk(
@@ -37,6 +40,8 @@ const initialState = {
           },
           withCredentials: true
         });
+
+        console.log('create data',data)
         return data;
       } catch (error) {
         return rejectWithValue(error.response?.data?.message || 'Failed to send message');

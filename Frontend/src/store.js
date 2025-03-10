@@ -6,8 +6,8 @@ import roomReducer from './Slice/roomSlice'
 export const store = configureStore({
      reducer:{
         auth: authReducer,
-        message: messageReducer,
-        room:roomReducer
+        messages: messageReducer,
+        rooms:roomReducer
      },
      devTools:true
-})
+})     

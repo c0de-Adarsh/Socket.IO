@@ -44,6 +44,7 @@ const  { getUsersInRoom, addUser, removeUser, getUser } = require('./Utils/user'
         io.to(user.room).emit('message', {
           userId: user.userId,
           user: user.username,
+          sender: { _id: user.userId, username: user.username }, 
           text: message,
           createdAt: new Date().toISOString()
         });
@@ -79,6 +80,7 @@ const  { getUsersInRoom, addUser, removeUser, getUser } = require('./Utils/user'
             room: user.room,
             users: getUsersInRoom(user.room)
           });
+          console.log("📢 Users in Room:", getUsersInRoom(user.room))
         }
       });
     });

@@ -7,11 +7,14 @@ import Profile from './Pages/Profile'
 import HomePage from './Pages/HomePages'
 import ChatPage from './Pages/ChatPage'
 import PrivateRoute from './Components/PrivateRoute'
+import { SocketProvider } from './Context/SocketContext'
+import NotFoundPage from './Pages/NotFoundPage'
 const App = () => {
   return (
   <>
   
   <div>
+    <SocketProvider>
     <BrowserRouter>
     <div>
       <Header />
@@ -27,9 +30,11 @@ const App = () => {
           <ChatPage />
         </PrivateRoute>
       }/>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
      </main>
     </BrowserRouter>
+    </SocketProvider>
   </div>
   </>
   )

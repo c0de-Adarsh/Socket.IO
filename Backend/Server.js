@@ -35,6 +35,6 @@ app.get('/h',( req , res)=>{
     res.send('Hello world')
 })
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server is Up and Listing on ${PORT}`)
 })

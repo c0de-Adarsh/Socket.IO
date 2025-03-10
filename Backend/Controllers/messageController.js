@@ -2,27 +2,40 @@ const Message = require('../Models/messageModel');
 
 
 
-const getMessage = async (req , res) =>{
-
+const getMessage = async (req, res) => {
     try {
-       
-        const {room} = req.params;
-        const message = await Message.find({room})
-        .populate('sender','username avatar')
-        .sort({createdAt: 1})
+        let { room } = req.params;
+        
 
-        res.json(message)
+        // ✅ Check if room is coming as an ObjectId instead of string
+        
+
+        // Ensure room name is properly formatted
+        
+
+        // Fetch messages for the correct room
+        const messages = await Message.find({ rooms})  // Ensure string match
+            .populate('sender', 'username avatar')
+            .sort({ createdAt: 1 });
+
+       
+
+        res.json(messages);
     } catch (error) {
+       
         res.status(500).json({ message: error.message });
     }
-}
+};
+
+
+
 
 
 const createMessage = async (req , res) =>{
 
     try {
        
-        const {content , room} = req.params;
+        const {content , room} = req.body;
 
         if(!content || !room){
             return res.status(400).json({
