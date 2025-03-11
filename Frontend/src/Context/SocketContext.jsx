@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUsers } from '../Slice/roomSlice';
 import { addMessage } from '../Slice/messageSlice';
 
-
 const SocketContext = createContext({
   socket: null,
   isConnected: false,
@@ -44,7 +43,9 @@ export const SocketProvider = ({ children }) => {
     });
 
     newSocket.on('message', (message) => {
-      console.log('Received message:', message);
+      console.log('Received message from server:', message);
+      
+      // मैसेज को डिस्पैच करें - फॉर्मेट अब सर्वर से सही आएगा
       dispatch(addMessage(message));
     });
 
@@ -53,8 +54,10 @@ export const SocketProvider = ({ children }) => {
       dispatch(setUsers(users));
     });
 
-    // Expose socket globally for debugging
-    window.socket = newSocket;
+    newSocket.on('userTyping', (data) => {
+      console.log('User typing:', data);
+      // यहां टाइपिंग इंडिकेटर हैंडल करें (अगर आपके UI में इम्प्लीमेंट है)
+    });
 
     // Cleanup on unmount
     return () => {
@@ -83,7 +86,13 @@ export const SocketProvider = ({ children }) => {
   // Send a message
   const sendMessage = (message, callback) => {
     if (socket && isConnected) {
-      socket.emit('sendMessage', message, callback);
+      // यहां हम केवल socket.emit करते हैं, मैसेज को डिस्पैच नहीं करते
+      socket.emit('sendMessage', message, (response) => {
+        if (response && response.error) {
+          console.error('Error sending message:', response.error);
+        }
+        if (callback) callback(response);
+      });
     }
   };
 

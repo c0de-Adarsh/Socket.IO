@@ -41,7 +41,7 @@ const initialState = {
           withCredentials: true
         });
 
-        console.log('create data',data)
+        
         return data;
       } catch (error) {
         return rejectWithValue(error.response?.data?.message || 'Failed to send message');
