@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json({ limit: "10mb" })); 
 app.use(cookieParser())
 app.use(cors({
-  origin:'https://chat-app-nu-beige.vercel.app',
+  origin:'https://chat-app-pearl-eight.vercel.app',
   credentials:true
 })) 
  app.use(router)
@@ -22,7 +22,7 @@ app.use(cors({
  const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://chat-app-nu-beige.vercel.app',
+    origin: 'https://chat-app-pearl-eight.vercel.app',
     methods: ['GET', 'POST'],
     credentials: true
   }
