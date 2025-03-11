@@ -13,14 +13,14 @@ const RoomList = ({ rooms, activeRoom }) => {
   const displayRooms = rooms.length > 0 ? rooms : defaultRooms;
 
   return (
-    <div className="bg-indigo-800 text-white w-64 p-4 hidden md:block">
-      <h2 className="text-xl font-bold mb-6">Chat Rooms</h2>
+    <div className="bg-indigo-800 text-white md:w-64 w-36 p-4  md:block">
+      <h2 className="md:text-xl text-sm font-bold mb-6">Chat Rooms</h2>
       <ul className="space-y-2">
         {displayRooms.map((room) => (
           <li key={room.id}>
             <Link
               to={`/chat/${room.id}`}
-              className={`flex items-center p-2 rounded-md ${
+              className={`flex items-center md:text-xl text-sm p-2 rounded-md ${
                 activeRoom === room.id
                   ? 'bg-indigo-600'
                   : 'hover:bg-indigo-700'

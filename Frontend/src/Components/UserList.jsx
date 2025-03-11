@@ -5,8 +5,8 @@ const UsersList = ({ users }) => {
 
   
   return (
-    <div className="bg-gray-50 border-l border-gray-200 p-4 w-64 hidden md:block">
-      <h3 className="text-lg font-semibold mb-4">Users in Room ({users.length})</h3>
+    <div className="bg-gray-50 border-l border-gray-200 p-4 w-64  md:block">
+      <h3 className="md:text-lg font-semibold text-xs mb-4">Users in Room ({users.length})</h3>
       <ul className="space-y-2">
         {users.map((user) => (
           <li key={user.id} className="flex items-center">

@@ -79,7 +79,7 @@ const ChatPage = () => {
      <RoomList rooms={[]} activeRoom={activeRoom}/>
 
 
-     <div className='flex flex-col flex-1'>
+     <div className='flex flex-col flex-1 '>
       <div className="bg-white border-b border-gray-200 p-4">
         <h2 className='text-xl font-semibold'>
           #{roomId}

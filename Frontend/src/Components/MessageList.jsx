@@ -12,9 +12,9 @@ const MessageList = ({ messages }) => {
 
   const formatTime = (dateString) => {
     try {
-      if (!dateString) return ""; // अगर डेट स्ट्रिंग गायब है
+      if (!dateString) return ""; 
       const date = new Date(dateString);
-      if (isNaN(date.getTime())) return ""; // अगर इनवैलिड डेट है
+      if (isNaN(date.getTime())) return ""; 
       return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } catch (error) {
       console.error("Date formatting error:", error);
@@ -22,7 +22,7 @@ const MessageList = ({ messages }) => {
     }
   };
 
-  // चेक करें कि मैसेज अरे है या नहीं
+
   if (!Array.isArray(messages)) {
     console.error("Expected messages to be an array, got:", messages);
     return <div>No messages to display</div>;
@@ -32,10 +32,10 @@ const MessageList = ({ messages }) => {
     <div className="flex-1 overflow-y-auto p-4 space-y-4">
       {messages
         .filter(message => {
-          // अवैध मैसेज को फिल्टर करें
+        
           if (!message) return false;
           
-          // Invalid Date वाले सिस्टम मैसेज को फ़िल्टर करें
+          
           if (message.sender && message.sender._id === 'system' && 
               (!message.createdAt || isNaN(new Date(message.createdAt).getTime()))) {
             return false;
@@ -44,7 +44,7 @@ const MessageList = ({ messages }) => {
           return true;
         })
         .map((message) => {
-          // सुनिश्चित करें कि sender ऑब्जेक्ट मौजूद है
+         
           const sender = message.sender || { 
             _id: 'system', 
             username: message.user || 'System' 
@@ -53,7 +53,7 @@ const MessageList = ({ messages }) => {
           const isCurrentUser = user && sender._id === user._id;
           const messageContent = message.content || message.text || "";
           
-          // अगर मैसेज खाली है तो स्किप करें
+        
           if (!messageContent.trim()) return null;
           
           return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Header from './Components/Header'
 import Register from './Pages/Register'
@@ -9,7 +9,16 @@ import ChatPage from './Pages/ChatPage'
 import PrivateRoute from './Components/PrivateRoute'
 import { SocketProvider } from './Context/SocketContext'
 import NotFoundPage from './Pages/NotFoundPage'
+import { getUserProfile } from './Slice/authSlice'
+import { useDispatch } from 'react-redux'
 const App = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserProfile());  
+  }, [dispatch]);
+
   return (
   <>
   
