@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json({ limit: "10mb" })); 
 app.use(cookieParser())
 app.use(cors({
-  origin:'https://chat-app-nu-beige.vercel.app/',
+  origin:'https://chat-app-nu-beige.vercel.app',
   credentials:true
 })) 
  app.use(router)
