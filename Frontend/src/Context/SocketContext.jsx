@@ -25,7 +25,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Initialize socket connection 
-    const newSocket = io('http://localhost:5000', {
+    const newSocket = io('https://chat-app-jmtx.onrender.com', {
       withCredentials: true
     });
 
@@ -45,7 +45,7 @@ export const SocketProvider = ({ children }) => {
     newSocket.on('message', (message) => {
       console.log('Received message from server:', message);
       
-      // मैसेज को डिस्पैच करें - फॉर्मेट अब सर्वर से सही आएगा
+     
       dispatch(addMessage(message));
     });
 
@@ -56,7 +56,7 @@ export const SocketProvider = ({ children }) => {
 
     newSocket.on('userTyping', (data) => {
       console.log('User typing:', data);
-      // यहां टाइपिंग इंडिकेटर हैंडल करें (अगर आपके UI में इम्प्लीमेंट है)
+      
     });
 
     // Cleanup on unmount
@@ -86,7 +86,7 @@ export const SocketProvider = ({ children }) => {
   // Send a message
   const sendMessage = (message, callback) => {
     if (socket && isConnected) {
-      // यहां हम केवल socket.emit करते हैं, मैसेज को डिस्पैच नहीं करते
+    
       socket.emit('sendMessage', message, (response) => {
         if (response && response.error) {
           console.error('Error sending message:', response.error);
