@@ -13,11 +13,11 @@ import { getUserProfile } from './Slice/authSlice'
 import { useDispatch } from 'react-redux'
 const App = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getUserProfile());  
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUserProfile());  
+  // }, [dispatch]);
 
   return (
   <>

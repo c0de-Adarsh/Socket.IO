@@ -24,7 +24,7 @@ export const SocketProvider = ({ children }) => {
   const { activeRoom } = useSelector((state) => state.rooms);
 
   useEffect(() => {
-    // Initialize socket connection
+    // Initialize socket connection 
     const newSocket = io('http://localhost:5000', {
       withCredentials: true
     });
